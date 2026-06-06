@@ -4,29 +4,30 @@
 #include "../services/TrackingService.h"
 #include <iostream>
 #include <limits>
+using namespace std;
 
 namespace SwiftExpedition {
 
 bool ManagerMenu::show(User* user, PaketService& paket, ReportService& report, TrackingService& tracking) {
     int pilihan;
     do {
-        std::cout << "\n  ============================================\n";
-        std::cout << "  === MENU MANAGER ===\n";
-        std::cout << "  User: " << user->nama << "\n";
-        std::cout << "  ============================================\n";
-        std::cout << "  1. Laporan Semua Paket\n";
-        std::cout << "  2. Laporan Paket by Status\n";
-        std::cout << "  3. Sorting Paket Berdasarkan Biaya\n";
-        std::cout << "  4. Sorting Paket Berdasarkan Berat\n";
-        std::cout << "  5. Statistik Pengiriman\n";
-        std::cout << "  6. Lihat Riwayat Tracking\n";
-        std::cout << "  7. Lihat Semua Paket\n";
-        std::cout << "  0. Logout\n";
-        std::cout << "  99. Exit Program\n";
-        std::cout << "  ----------------------------------------\n";
-        std::cout << "  Pilihan: ";
-        std::cin >> pilihan;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cout << "\n  ============================================\n";
+        cout << "  === MENU MANAGER ===\n";
+        cout << "  User: " << user->nama << "\n";
+        cout << "  ============================================\n";
+        cout << "  1. Laporan Semua Paket\n";
+        cout << "  2. Laporan Paket by Status\n";
+        cout << "  3. Sorting Paket Berdasarkan Biaya\n";
+        cout << "  4. Sorting Paket Berdasarkan Berat\n";
+        cout << "  5. Statistik Pengiriman\n";
+        cout << "  6. Lihat Riwayat Tracking\n";
+        cout << "  7. Lihat Semua Paket\n";
+        cout << "  0. Logout\n";
+        cout << "  99. Exit Program\n";
+        cout << "  ----------------------------------------\n";
+        cout << "  Pilihan: ";
+        cin >> pilihan;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (pilihan) {
         case 1: {
@@ -40,23 +41,23 @@ bool ManagerMenu::show(User* user, PaketService& paket, ReportService& report, T
             break;
         }
         case 3: {
-            std::cout << "\n  1. Ascending (termurah)\n  2. Descending (termahal)\n  Pilih: ";
-            int s; std::cin >> s;
+            cout << "\n  1. Ascending (termurah)\n  2. Descending (termahal)\n  Pilih: ";
+            int s; cin >> s;
             auto sorted = paket.sortByBiaya(s == 1);
-            std::cout << "\n  ===== PAKET DIURUTKAN BERDASARKAN BIAYA =====\n";
+            cout << "\n  ===== PAKET DIURUTKAN BERDASARKAN BIAYA =====\n";
             for (const auto& p : sorted) {
-                std::cout << "  " << p.id << " | " << p.resi << " | " << p.nama_penerima
+                cout << "  " << p.id << " | " << p.resi << " | " << p.nama_penerima
                           << " | Rp " << p.biaya << " | " << p.status << "\n";
             }
             break;
         }
         case 4: {
-            std::cout << "\n  1. Ascending (teringan)\n  2. Descending (terberat)\n  Pilih: ";
-            int s; std::cin >> s;
+            cout << "\n  1. Ascending (teringan)\n  2. Descending (terberat)\n  Pilih: ";
+            int s; cin >> s;
             auto sorted = paket.sortByBerat(s == 1);
-            std::cout << "\n  ===== PAKET DIURUTKAN BERDASARKAN BERAT =====\n";
+            cout << "\n  ===== PAKET DIURUTKAN BERDASARKAN BERAT =====\n";
             for (const auto& p : sorted) {
-                std::cout << "  " << p.id << " | " << p.resi << " | " << p.nama_penerima
+                cout << "  " << p.id << " | " << p.resi << " | " << p.nama_penerima
                           << " | " << p.berat << " kg | " << p.status << "\n";
             }
             break;
@@ -71,11 +72,11 @@ bool ManagerMenu::show(User* user, PaketService& paket, ReportService& report, T
             break;
         }
         case 7: paket.displayAllPaket(); break;
-        case 0: std::cout << "  Logout...\n"; return true;
-        case 99: std::cout << "\n  Keluar dari program...\n"; return false;
-        default: std::cout << "  Pilihan tidak valid!\n"; break;
+        case 0: cout << "  Logout...\n"; return true;
+        case 99: cout << "\n  Keluar dari program...\n"; return false;
+        default: cout << "  Pilihan tidak valid!\n"; break;
         }
     } while (true);
 }
 
-} // namespace SwiftExpedition
+} 

@@ -3,149 +3,150 @@
 #include <iostream>
 #include <limits>
 #include <string>
+using namespace std;
 
 namespace SwiftExpedition {
 
 bool AdminMenu::show(User* user, PaketService& paket) {
     int pilihan;
     do {
-        std::cout << "\n  ============================================\n";
-        std::cout << "  === MENU ADMIN ===\n";
-        std::cout << "  User: " << user->nama << "\n";
-        std::cout << "  ============================================\n";
-        std::cout << "  1. Tambah Paket\n";
-        std::cout << "  2. Hapus Paket\n";
-        std::cout << "  3. Edit Paket\n";
-        std::cout << "  4. Cari Paket (by ID)\n";
-        std::cout << "  5. Cari Paket (by Resi)\n";
-        std::cout << "  6. Lihat Semua Paket\n";
-        std::cout << "  7. Lihat Antrean Paket\n";
-        std::cout << "  8. Lihat Daftar Kurir\n";
-        std::cout << "  9. Lihat Daftar Layanan\n";
-        std::cout << "  10. Lihat Klasifikasi Berat\n";
-        std::cout << "  11. Lihat AVL Tree (Resi)\n";
-        std::cout << "  0. Logout\n";
-        std::cout << "  99. Exit Program\n";
-        std::cout << "  ----------------------------------------\n";
-        std::cout << "  Pilihan: ";
-        std::cin >> pilihan;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cout << "\n  ============================================\n";
+        cout << "  === MENU ADMIN ===\n";
+        cout << "  User: " << user->nama << "\n";
+        cout << "  ============================================\n";
+        cout << "  1. Tambah Paket\n";
+        cout << "  2. Hapus Paket\n";
+        cout << "  3. Edit Paket\n";
+        cout << "  4. Cari Paket (by ID)\n";
+        cout << "  5. Cari Paket (by Resi)\n";
+        cout << "  6. Lihat Semua Paket\n";
+        cout << "  7. Lihat Antrean Paket\n";
+        cout << "  8. Lihat Daftar Kurir\n";
+        cout << "  9. Lihat Daftar Layanan\n";
+        cout << "  10. Lihat Klasifikasi Berat\n";
+        cout << "  11. Lihat AVL Tree (Resi)\n";
+        cout << "  0. Logout\n";
+        cout << "  99. Exit Program\n";
+        cout << "  ----------------------------------------\n";
+        cout << "  Pilihan: ";
+        cin >> pilihan;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (pilihan) {
-        case 1: { // Tambah paket
+        case 1: { 
             Paket p;
-            p.id = 0; // akan di-generate oleh service
-            std::cout << "\n  --- Tambah Paket Baru ---\n";
-            std::cout << "  Resi          : "; std::getline(std::cin, p.resi);
-            std::cout << "  Nama Penerima : "; std::getline(std::cin, p.nama_penerima);
-            std::cout << "  Alamat Tujuan : "; std::getline(std::cin, p.alamat_tujuan);
-            std::cout << "  Kota Asal     : "; std::getline(std::cin, p.kota_asal);
-            std::cout << "  Kota Tujuan   : "; std::getline(std::cin, p.kota_tujuan);
-            std::cout << "  Berat (kg)    : "; std::cin >> p.berat;
-            std::cout << "  ID Layanan    : "; std::cin >> p.id_layanan;
-            std::cout << "  ID Klasifikasi: "; std::cin >> p.id_klasifikasi;
-            std::cout << "  Biaya         : "; std::cin >> p.biaya;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            p.id = 0; 
+            cout << "\n  --- Tambah Paket Baru ---\n";
+            cout << "  Resi          : "; getline(cin, p.resi);
+            cout << "  Nama Penerima : "; getline(cin, p.nama_penerima);
+            cout << "  Alamat Tujuan : "; getline(cin, p.alamat_tujuan);
+            cout << "  Kota Asal     : "; getline(cin, p.kota_asal);
+            cout << "  Kota Tujuan   : "; getline(cin, p.kota_tujuan);
+            cout << "  Berat (kg)    : "; cin >> p.berat;
+            cout << "  ID Layanan    : "; cin >> p.id_layanan;
+            cout << "  ID Klasifikasi: "; cin >> p.id_klasifikasi;
+            cout << "  Biaya         : "; cin >> p.biaya;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             p.status = "Pending";
             p.id_kurir = 0;
             paket.addPaket(p);
-            // Juga masukkan ke queue
+
             paket.enqueuePaket(p);
-            std::cout << "\n  [SUCCESS] Paket berhasil ditambahkan dan dimasukkan ke antrean!\n";
+            cout << "\n  [SUCCESS] Paket berhasil ditambahkan dan dimasukkan ke antrean!\n";
             break;
         }
-        case 2: { // Hapus paket
+        case 2: { 
             int id;
-            std::cout << "\n  Masukkan ID paket yang akan dihapus: ";
-            std::cin >> id;
+            cout << "\n  Masukkan ID paket yang akan dihapus: ";
+            cin >> id;
             if (paket.deletePaket(id)) {
-                std::cout << "  [SUCCESS] Paket berhasil dihapus!\n";
+                cout << "  [SUCCESS] Paket berhasil dihapus!\n";
             } else {
-                std::cout << "  [ERROR] Paket tidak ditemukan!\n";
+                cout << "  [ERROR] Paket tidak ditemukan!\n";
             }
             break;
         }
-        case 3: { // Edit paket
+        case 3: { 
             int id;
-            std::cout << "\n  Masukkan ID paket yang akan diedit: ";
-            std::cin >> id;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cout << "\n  Masukkan ID paket yang akan diedit: ";
+            cin >> id;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
             Paket* existing = paket.findPaketById(id);
             if (!existing) {
-                std::cout << "  [ERROR] Paket tidak ditemukan!\n";
+                cout << "  [ERROR] Paket tidak ditemukan!\n";
                 break;
             }
 
             Paket newData = *existing;
-            std::cout << "  --- Edit Paket (kosongkan untuk tidak mengubah) ---\n";
-            std::string input;
+            cout << "  --- Edit Paket (kosongkan untuk tidak mengubah) ---\n";
+            string input;
 
-            std::cout << "  Resi [" << newData.resi << "]: "; std::getline(std::cin, input);
+            cout << "  Resi [" << newData.resi << "]: "; getline(cin, input);
             if (!input.empty()) newData.resi = input;
 
-            std::cout << "  Nama Penerima [" << newData.nama_penerima << "]: "; std::getline(std::cin, input);
+            cout << "  Nama Penerima [" << newData.nama_penerima << "]: "; getline(cin, input);
             if (!input.empty()) newData.nama_penerima = input;
 
-            std::cout << "  Alamat Tujuan [" << newData.alamat_tujuan << "]: "; std::getline(std::cin, input);
+            cout << "  Alamat Tujuan [" << newData.alamat_tujuan << "]: "; getline(cin, input);
             if (!input.empty()) newData.alamat_tujuan = input;
 
-            std::cout << "  Kota Asal [" << newData.kota_asal << "]: "; std::getline(std::cin, input);
+            cout << "  Kota Asal [" << newData.kota_asal << "]: "; getline(cin, input);
             if (!input.empty()) newData.kota_asal = input;
 
-            std::cout << "  Kota Tujuan [" << newData.kota_tujuan << "]: "; std::getline(std::cin, input);
+            cout << "  Kota Tujuan [" << newData.kota_tujuan << "]: "; getline(cin, input);
             if (!input.empty()) newData.kota_tujuan = input;
 
-            std::cout << "  Status [" << newData.status << "]: "; std::getline(std::cin, input);
+            cout << "  Status [" << newData.status << "]: "; getline(cin, input);
             if (!input.empty()) newData.status = input;
 
-            std::cout << "  Berat [" << newData.berat << "]: "; std::getline(std::cin, input);
-            if (!input.empty()) newData.berat = std::stod(input);
+            cout << "  Berat [" << newData.berat << "]: "; getline(cin, input);
+            if (!input.empty()) newData.berat = stod(input);
 
-            std::cout << "  Biaya [" << newData.biaya << "]: "; std::getline(std::cin, input);
-            if (!input.empty()) newData.biaya = std::stod(input);
+            cout << "  Biaya [" << newData.biaya << "]: "; getline(cin, input);
+            if (!input.empty()) newData.biaya = stod(input);
 
             if (paket.editPaket(id, newData)) {
-                std::cout << "  [SUCCESS] Paket berhasil diupdate!\n";
+                cout << "  [SUCCESS] Paket berhasil diupdate!\n";
             } else {
-                std::cout << "  [ERROR] Gagal mengupdate paket!\n";
+                cout << "  [ERROR] Gagal mengupdate paket!\n";
             }
             break;
         }
-        case 4: { // Cari by ID
+        case 4: { 
             int id;
-            std::cout << "\n  Masukkan ID paket: ";
-            std::cin >> id;
+            cout << "\n  Masukkan ID paket: ";
+            cin >> id;
             Paket* found = paket.findPaketById(id);
             if (found) {
-                std::cout << "\n  ===== PAKET DITEMUKAN =====\n";
-                std::cout << "  ID       : " << found->id << "\n";
-                std::cout << "  Resi     : " << found->resi << "\n";
-                std::cout << "  Penerima : " << found->nama_penerima << "\n";
-                std::cout << "  Alamat   : " << found->alamat_tujuan << "\n";
-                std::cout << "  Dari     : " << found->kota_asal << " -> " << found->kota_tujuan << "\n";
-                std::cout << "  Berat    : " << found->berat << " kg\n";
-                std::cout << "  Biaya    : Rp " << found->biaya << "\n";
-                std::cout << "  Status   : " << found->status << "\n";
+                cout << "\n  ===== PAKET DITEMUKAN =====\n";
+                cout << "  ID       : " << found->id << "\n";
+                cout << "  Resi     : " << found->resi << "\n";
+                cout << "  Penerima : " << found->nama_penerima << "\n";
+                cout << "  Alamat   : " << found->alamat_tujuan << "\n";
+                cout << "  Dari     : " << found->kota_asal << " -> " << found->kota_tujuan << "\n";
+                cout << "  Berat    : " << found->berat << " kg\n";
+                cout << "  Biaya    : Rp " << found->biaya << "\n";
+                cout << "  Status   : " << found->status << "\n";
             } else {
-                std::cout << "  [ERROR] Paket tidak ditemukan!\n";
+                cout << "  [ERROR] Paket tidak ditemukan!\n";
             }
             break;
         }
-        case 5: { // Cari by Resi
-            std::string resi;
-            std::cout << "\n  Masukkan nomor resi: ";
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::getline(std::cin, resi);
+        case 5: { 
+            string resi;
+            cout << "\n  Masukkan nomor resi: ";
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            getline(cin, resi);
             Paket* found = paket.findPaketByResi(resi);
             if (found) {
-                std::cout << "\n  ===== PAKET DITEMUKAN =====\n";
-                std::cout << "  ID       : " << found->id << "\n";
-                std::cout << "  Resi     : " << found->resi << "\n";
-                std::cout << "  Penerima : " << found->nama_penerima << "\n";
-                std::cout << "  Status   : " << found->status << "\n";
+                cout << "\n  ===== PAKET DITEMUKAN =====\n";
+                cout << "  ID       : " << found->id << "\n";
+                cout << "  Resi     : " << found->resi << "\n";
+                cout << "  Penerima : " << found->nama_penerima << "\n";
+                cout << "  Status   : " << found->status << "\n";
             } else {
-                std::cout << "  [ERROR] Paket tidak ditemukan!\n";
+                cout << "  [ERROR] Paket tidak ditemukan!\n";
             }
             break;
         }
@@ -154,26 +155,26 @@ bool AdminMenu::show(User* user, PaketService& paket) {
         case 8: paket.displayKurir(); break;
         case 9: {
             auto layananList = paket.getLayanan();
-            std::cout << "\n  ===== DAFTAR LAYANAN =====\n";
+            cout << "\n  ===== DAFTAR LAYANAN =====\n";
             for (const auto& l : layananList) {
-                std::cout << "  ID: " << l.id << " | " << l.nama << " | Tarif: Rp " << l.tarif_per_kg << "/kg\n";
+                cout << "  ID: " << l.id << " | " << l.nama << " | Tarif: Rp " << l.tarif_per_kg << "/kg\n";
             }
             break;
         }
         case 10: {
             auto klasList = paket.getKlasifikasi();
-            std::cout << "\n  ===== KLASIFIKASI BERAT =====\n";
+            cout << "\n  ===== KLASIFIKASI BERAT =====\n";
             for (const auto& k : klasList) {
-                std::cout << "  ID: " << k.id << " | " << k.nama << " | Tambahan: Rp " << k.biaya_tambahan << "\n";
+                cout << "  ID: " << k.id << " | " << k.nama << " | Tambahan: Rp " << k.biaya_tambahan << "\n";
             }
             break;
         }
         case 11: paket.displayAVLTree(); break;
-        case 0: std::cout << "  Logout...\n"; return true;
-        case 99: std::cout << "\n  Keluar dari program...\n"; return false;
-        default: std::cout << "  Pilihan tidak valid!\n"; break;
+        case 0: cout << "  Logout...\n"; return true;
+        case 99: cout << "\n  Keluar dari program...\n"; return false;
+        default: cout << "  Pilihan tidak valid!\n"; break;
         }
     } while (true);
 }
 
-} // namespace SwiftExpedition
+} 

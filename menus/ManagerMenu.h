@@ -2,6 +2,7 @@
 #include "../models/User.h"
 #include <vector>
 #include "../models/Paket.h"
+using namespace std;
 
 namespace SwiftExpedition {
 
@@ -11,8 +12,8 @@ class TrackingService;
 
 class ManagerMenu {
 public:
-    // Returns true if user chose logout, false if exit program
+
     bool show(User* user, PaketService& paket, ReportService& report, TrackingService& tracking);
 };
 
-} // namespace SwiftExpedition
+} 

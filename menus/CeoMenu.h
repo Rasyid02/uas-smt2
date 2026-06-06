@@ -1,5 +1,6 @@
 #pragma once
 #include "../models/User.h"
+using namespace std;
 
 namespace SwiftExpedition {
 
@@ -10,9 +11,9 @@ class RoutingService;
 
 class CeoMenu {
 public:
-    // Returns true if user chose logout, false if exit program
+
     bool show(User* user, PaketService& paket, ReportService& report, 
               TrackingService& tracking, RoutingService& routing);
 };
 
-} // namespace SwiftExpedition
+} 

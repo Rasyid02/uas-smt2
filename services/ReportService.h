@@ -2,11 +2,7 @@
 #include <vector>
 #include <string>
 #include "../models/Paket.h"
-
-// ============================================================
-// UAS: ReportService - Laporan dan statistik
-// UAS: sort (12), count (14), callback (5), lambda (16)
-// ============================================================
+using namespace std;
 
 namespace SwiftExpedition {
 
@@ -14,15 +10,15 @@ class ReportService {
 public:
     ReportService();
 
-    void displayLaporanPaket(std::vector<Paket>& pakets);
-    void displayLaporanByStatus(std::vector<Paket>& pakets);
-    void displayStatistik(std::vector<Paket>& pakets);
+    void displayLaporanPaket(vector<Paket>& pakets);
+    void displayLaporanByStatus(vector<Paket>& pakets);
+    void displayStatistik(vector<Paket>& pakets);
 
     void displayCEOReport(
-        std::vector<Paket>& pakets,
+        vector<Paket>& pakets,
         int totalKurir,
         int totalTracking
     );
 };
 
-} // namespace SwiftExpedition
+} 

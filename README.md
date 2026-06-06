@@ -1,15 +1,15 @@
-# Swift Expedition - Sistem Manajemen Ekspedisi
+# Swift Expedition - C++
 
-> Proyek UAS Terintegrasi Algoritma Pemrograman & Struktur Data  
-> CLI Application berbasis C++
+> Project UAS matakuliah Algoritma Pemrograman & Struktur Data  
+> CLI program dengan bahasa C++
 
 ---
 
 ## Overview
 
-**Swift Expedition** adalah aplikasi konsol manajemen ekspedisi multi-role yang mengimplementasikan seluruh struktur data dan konsep pemrograman yang diwajibkan pada UAS. Aplikasi ini digunakan oleh empat role pengguna: **CEO**, **Manager**, **Admin**, dan **Kurir**, dengan fitur lengkap manajemen paket, tracking pengiriman, dan visualisasi rute antar kota.
+**Swift Expedition** adalah aplikasi cli pengelolaan sistem ekspedisi dengan multi-role yang memenuhi persyaratan uas. Program ini memiliki 4 role dummy: **CEO**, **Manager**, **Admin**, dan **Kurir**,.Fitur pada program ini: manajemen paket, tracking pengiriman, dan visualisasi rute antar kota.
 
-### Daftar Implementasi Wajib
+### Daftar Syarat uas yang Wajib dipenuhi
 
 | No | Konsep | Lokasi Implementasi |
 |----|--------|-------------------|
@@ -30,14 +30,14 @@
 | 15 | file handling | `storage/CSVManager.cpp` (ifstream/ofstream) |
 | 16 | lambda expression | `services/PaketService.cpp` (lambda di std::sort) |
 
-### Daftar Struktur Data
+### Penggunaan Struktur Data
 
 | No | Struktur Data | File | Fungsi |
 |----|--------------|------|--------|
 | 1 | Singly Linked List | `datastructures/SinglyLinkedList.h` | Master data paket |
 | 2 | Circular Linked List | `datastructures/CircularLinkedList.h` | Rotasi kurir |
 | 3 | Stack | `datastructures/Stack.h` | Undo status tracking |
-| 4 | Queue | `datastructures/Queue.h` | Antrean paket masuk |
+| 4 | Queue | `datastructures/Queue.h` | Antrian paket masuk |
 | 5 | AVL Tree | `datastructures/AVLTree.h` | Pencarian nomor resi |
 | 6 | Graph | `datastructures/Graph.h` | Jalur antar kota |
 | 7 | BFS | `services/RoutingService.cpp` | Jalur transit terdekat |
@@ -103,21 +103,13 @@ swift_expedition_uas/
 
 ---
 
-## Kompilasi
-
-Menggunakan **g++** (MinGW-w64):
-
+## Cara Penggunaan
+_*Compile program dengan command ini sebelum melakukan execution_:
 ```bash
 g++ main.cpp menus/*.cpp services/*.cpp storage/*.cpp -o main.exe
 ```
 
-> Pastikan shell berada di direktori `swift_expedition_uas/`.
-
----
-
-## Cara Penggunaan
-
-### 1. Jalankan Program
+### 1. Start Program
 
 ```bash
 ./main.exe
@@ -125,7 +117,7 @@ g++ main.cpp menus/*.cpp services/*.cpp storage/*.cpp -o main.exe
 
 ### 2. Login
 
-Gunakan salah satu akun berikut:
+Gunakan salah satu data dummy:
 
 | Username | Password | Role    |
 |----------|----------|---------|
@@ -216,9 +208,9 @@ id;nama;no_hp;kendaraan;status
 
 ---
 
-## Catatan
+## _Notes_
 
-- Semua data disimpan dalam folder `data/` dan dibaca saat program startup
+- Semua data disave pada folder `data/` dan dibaca saat program dimulai
 - Data otomatis tersimpan ke CSV saat user logout
 - Program menggunakan delimiter `;` (titik koma) untuk file CSV
 - Kompatibel dengan Windows (g++ MinGW-w64)

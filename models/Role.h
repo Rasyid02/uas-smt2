@@ -1,10 +1,7 @@
 #pragma once
 #include <string>
+using namespace std;
 
-// ============================================================
-// UAS: struct (1) - Penggunaan struct untuk enumerasi role
-// Digunakan untuk menentukan hak akses pengguna dalam sistem
-// ============================================================
 enum class RoleType {
     CEO,
     MANAGER,
@@ -12,8 +9,7 @@ enum class RoleType {
     KURIR
 };
 
-// UAS: inline function (7) - Konversi RoleType ke string untuk display
-inline std::string roleToString(RoleType r) {
+inline string roleToString(RoleType r) {
     switch (r) {
         case RoleType::CEO:     return "CEO";
         case RoleType::MANAGER: return "Manager";
@@ -23,8 +19,7 @@ inline std::string roleToString(RoleType r) {
     }
 }
 
-// UAS: inline function (7) - Konversi string ke RoleType untuk parsing CSV
-inline RoleType stringToRole(const std::string& s) {
+inline RoleType stringToRole(const string& s) {
     if (s == "CEO" || s == "ceo")     return RoleType::CEO;
     if (s == "Manager" || s == "manager") return RoleType::MANAGER;
     if (s == "Admin" || s == "admin") return RoleType::ADMIN;

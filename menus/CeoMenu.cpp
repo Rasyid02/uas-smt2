@@ -5,6 +5,7 @@
 #include "../services/RoutingService.h"
 #include <iostream>
 #include <limits>
+using namespace std;
 
 namespace SwiftExpedition {
 
@@ -12,31 +13,31 @@ bool CeoMenu::show(User* user, PaketService& paket, ReportService& report,
                     TrackingService& tracking, RoutingService& routing) {
     int pilihan;
     do {
-        std::cout << "\n  ============================================\n";
-        std::cout << "  === MENU CEO ===\n";
-        std::cout << "  User: " << user->nama << " (CEO)\n";
-        std::cout << "  ============================================\n";
-        std::cout << "  1. Laporan Keseluruhan (CEO Report)\n";
-        std::cout << "  2. Statistik Pengiriman\n";
-        std::cout << "  3. Lihat Semua Paket\n";
-        std::cout << "  4. Lihat Riwayat Tracking\n";
-        std::cout << "  5. Lihat Graph Rute Kota\n";
-        std::cout << "  6. BFS - Cari Jalur Terpendek Antar Kota\n";
-        std::cout << "  7. DFS - Tampilkan Semua Rute Dari Kota\n";
-        std::cout << "  8. Cari Semua Jalur Antar Kota\n";
-        std::cout << "  9. Lihat Daftar Kota\n";
-        std::cout << "  10. Simpan Data\n";
-        std::cout << "  0. Logout\n";
-        std::cout << "  99. Exit Program\n";
-        std::cout << "  ----------------------------------------\n";
-        std::cout << "  Pilihan: ";
-        std::cin >> pilihan;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cout << "\n  ============================================\n";
+        cout << "  === MENU CEO ===\n";
+        cout << "  User: " << user->nama << " (CEO)\n";
+        cout << "  ============================================\n";
+        cout << "  1. Laporan Keseluruhan (CEO Report)\n";
+        cout << "  2. Statistik Pengiriman\n";
+        cout << "  3. Lihat Semua Paket\n";
+        cout << "  4. Lihat Riwayat Tracking\n";
+        cout << "  5. Lihat Graph Rute Kota\n";
+        cout << "  6. BFS - Cari Jalur Terpendek Antar Kota\n";
+        cout << "  7. DFS - Tampilkan Semua Rute Dari Kota\n";
+        cout << "  8. Cari Semua Jalur Antar Kota\n";
+        cout << "  9. Lihat Daftar Kota\n";
+        cout << "  10. Simpan Data\n";
+        cout << "  0. Logout\n";
+        cout << "  99. Exit Program\n";
+        cout << "  ----------------------------------------\n";
+        cout << "  Pilihan: ";
+        cin >> pilihan;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (pilihan) {
         case 1: {
             auto pakets = paket.getAllPaket();
-            int totalKurir = 1; // simplified
+            int totalKurir = 1; 
             int totalTracking = 1;
             report.displayCEOReport(pakets, totalKurir, totalTracking);
             break;
@@ -53,22 +54,22 @@ bool CeoMenu::show(User* user, PaketService& paket, ReportService& report,
             break;
         }
         case 6: {
-            std::string asal, tujuan;
-            std::cout << "\n  Kota Asal  : "; std::getline(std::cin, asal);
-            std::cout << "  Kota Tujuan: "; std::getline(std::cin, tujuan);
+            string asal, tujuan;
+            cout << "\n  Kota Asal  : "; getline(cin, asal);
+            cout << "  Kota Tujuan: "; getline(cin, tujuan);
             routing.bfsSearch(asal, tujuan);
             break;
         }
         case 7: {
-            std::string start;
-            std::cout << "\n  Kota Awal: "; std::getline(std::cin, start);
+            string start;
+            cout << "\n  Kota Awal: "; getline(cin, start);
             routing.dfsSearch(start);
             break;
         }
         case 8: {
-            std::string asal, tujuan;
-            std::cout << "\n  Kota Asal  : "; std::getline(std::cin, asal);
-            std::cout << "  Kota Tujuan: "; std::getline(std::cin, tujuan);
+            string asal, tujuan;
+            cout << "\n  Kota Asal  : "; getline(cin, asal);
+            cout << "  Kota Tujuan: "; getline(cin, tujuan);
             routing.findAllRoutes(asal, tujuan);
             break;
         }
@@ -81,11 +82,11 @@ bool CeoMenu::show(User* user, PaketService& paket, ReportService& report,
             tracking.saveTracking("tracking.csv");
             break;
         }
-        case 0: std::cout << "  Logout...\n"; return true;
-        case 99: std::cout << "\n  Keluar dari program...\n"; return false;
-        default: std::cout << "  Pilihan tidak valid!\n"; break;
+        case 0: cout << "  Logout...\n"; return true;
+        case 99: cout << "\n  Keluar dari program...\n"; return false;
+        default: cout << "  Pilihan tidak valid!\n"; break;
         }
     } while (true);
 }
 
-} // namespace SwiftExpedition
+} 

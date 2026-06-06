@@ -3,25 +3,26 @@
 #include <iostream>
 #include <limits>
 #include <string>
+using namespace std;
 
 namespace SwiftExpedition {
 
 User* LoginMenu::show(AuthService& auth) {
-    std::string username, password;
+    string username, password;
     int attempts = 0;
     const int maxAttempts = 3;
 
     while (attempts < maxAttempts) {
-        std::cout << "\n  ============================================\n";
-        std::cout << "  === SWIFT EXPEDITION - LOGIN ===\n";
-        std::cout << "  ============================================\n";
-        std::cout << "  Username : ";
-        std::getline(std::cin, username);
-        std::cout << "  Password : ";
-        std::getline(std::cin, password);
+        cout << "\n  ============================================\n";
+        cout << "  === SWIFT EXPEDITION - LOGIN ===\n";
+        cout << "  ============================================\n";
+        cout << "  Username : ";
+        getline(cin, username);
+        cout << "  Password : ";
+        getline(cin, password);
 
         if (username.empty() || password.empty()) {
-            std::cout << "\n  [ERROR] Username dan password tidak boleh kosong!\n";
+            cout << "\n  [ERROR] Username dan password tidak boleh kosong!\n";
             attempts++;
             continue;
         }
@@ -29,20 +30,20 @@ User* LoginMenu::show(AuthService& auth) {
         User* user = auth.login(username, password);
 
         if (user != nullptr) {
-            std::cout << "\n  ============================================\n";
-            std::cout << "  Selamat datang, " << user->nama << "!\n";
-            std::cout << "  Role: " << roleToString(user->role) << "\n";
-            std::cout << "  ============================================\n";
+            cout << "\n  ============================================\n";
+            cout << "  Selamat datang, " << user->nama << "!\n";
+            cout << "  Role: " << roleToString(user->role) << "\n";
+            cout << "  ============================================\n";
             return user;
         }
 
         attempts++;
-        std::cout << "\n  [ERROR] Login gagal! Sisa percobaan: "
+        cout << "\n  [ERROR] Login gagal! Sisa percobaan: "
                   << (maxAttempts - attempts) << "\n";
     }
 
-    std::cout << "\n  [ERROR] Terlalu banyak percobaan login. Program berhenti.\n";
+    cout << "\n  [ERROR] Terlalu banyak percobaan login. Program berhenti.\n";
     return nullptr;
 }
 
-} // namespace SwiftExpedition
+} 

@@ -2,33 +2,25 @@
 #include <iostream>
 #include <vector>
 #include <functional>
+using namespace std;
 
-// ============================================================
-// UAS: Singly Linked List (Struktur Data 1)
-// Digunakan untuk MASTER DATA PAKET
-// Implementasi penuh dengan Node, insert, delete, update, search
-// Dilengkapi iterator (UAS: iterator - 11)
-// ============================================================
-
-namespace SwiftExpedition {  // UAS: namespace (4)
+namespace SwiftExpedition {  
 
 template<typename T>
 class SinglyLinkedList {
 private:
-    // UAS: struct (1) - Node internal untuk linked list
+
     struct Node {
         T data;
-        Node* next;  // UAS: pointer (*) - 2
+        Node* next;  
         Node(const T& d) : data(d), next(nullptr) {}
     };
 
-    Node* head;  // UAS: pointer (*) - 2
+    Node* head;  
     int size_;
 
 public:
-    // ============================================================
-    // UAS: Iterator (11) - Iterator class untuk traversal linked list
-    // ============================================================
+
     class Iterator {
     private:
         Node* current;
@@ -57,23 +49,18 @@ public:
         }
     };
 
-    // ============================================================
-    // UAS: default argument (6) - Konstruktor dengan nilai default
-    // ============================================================
     SinglyLinkedList() : head(nullptr), size_(0) {}
 
     ~SinglyLinkedList() {
         clear();
     }
 
-    // UAS: inline function (7) - Fungsi sederhana di header
     inline bool isEmpty() const { return head == nullptr; }
     inline int size() const { return size_; }
 
     Iterator begin() { return Iterator(head); }
     Iterator end() { return Iterator(nullptr); }
 
-    // UAS: reference (&) - 3: Parameter data menggunakan const reference
     void insert(const T& data) {
         Node* newNode = new Node(data);
         if (!head) {
@@ -88,7 +75,6 @@ public:
         size_++;
     }
 
-    // UAS: function overloading (8) - Insert di awal (prepend)
     void insertAtFront(const T& data) {
         Node* newNode = new Node(data);
         newNode->next = head;
@@ -96,7 +82,6 @@ public:
         size_++;
     }
 
-    // UAS: function overloading (8) - Insert di posisi tertentu
     bool insertAt(int index, const T& data) {
         if (index < 0 || index > size_) return false;
         if (index == 0) {
@@ -164,19 +149,17 @@ public:
         return true;
     }
 
-    // UAS: pointer (*) - 2: Mencari data, return pointer ke data atau nullptr
     T* findById(int id) {
         Node* temp = head;
         while (temp != nullptr) {
             if (temp->data.id == id) {
-                return &(temp->data);  // UAS: pointer (*) return
+                return &(temp->data);  
             }
             temp = temp->next;
         }
         return nullptr;
     }
 
-    // UAS: reference (&) - 3: Reference parameter untuk output
     bool findById(int id, T& result) {
         Node* temp = head;
         while (temp != nullptr) {
@@ -189,8 +172,7 @@ public:
         return false;
     }
 
-    // Cari berdasarkan resi (string)
-    T* findByResi(const std::string& resi) {
+    T* findByResi(const string& resi) {
         Node* temp = head;
         while (temp != nullptr) {
             if (temp->data.resi == resi) {
@@ -206,7 +188,7 @@ public:
         while (temp != nullptr) {
             if (temp->data.id == id) {
                 temp->data = newData;
-                temp->data.id = id;  // Pertahankan ID
+                temp->data.id = id;  
                 return true;
             }
             temp = temp->next;
@@ -214,8 +196,7 @@ public:
         return false;
     }
 
-    // UAS: callback function (5) - Traversal dengan callback
-    void forEach(std::function<void(T&)> callback) {
+    void forEach(function<void(T&)> callback) {
         Node* temp = head;
         while (temp != nullptr) {
             callback(temp->data);
@@ -223,9 +204,8 @@ public:
         }
     }
 
-    // Konversi ke vector (untuk sorting dan display)
-    std::vector<T> toVector() const {
-        std::vector<T> result;
+    vector<T> toVector() const {
+        vector<T> result;
         Node* temp = head;
         while (temp != nullptr) {
             result.push_back(temp->data);
@@ -238,13 +218,13 @@ public:
         Node* temp = head;
         int count = 0;
         while (temp != nullptr) {
-            std::cout << "[" << count++ << "] ID: " << temp->data.id
+            cout << "[" << count++ << "] ID: " << temp->data.id
                       << " | Resi: " << temp->data.resi
                       << " | Penerima: " << temp->data.nama_penerima
                       << " | Status: " << temp->data.status << "\n";
             temp = temp->next;
         }
-        if (count == 0) std::cout << "  (Tidak ada data)\n";
+        if (count == 0) cout << "  (Tidak ada data)\n";
     }
 
     void clear() {
@@ -256,8 +236,7 @@ public:
         size_ = 0;
     }
 
-    // Mendapatkan jumlah node (digunakan untuk count)
-    int countByStatus(const std::string& status) const {
+    int countByStatus(const string& status) const {
         int count = 0;
         Node* temp = head;
         while (temp != nullptr) {
@@ -268,4 +247,4 @@ public:
     }
 };
 
-} // namespace SwiftExpedition
+} 
