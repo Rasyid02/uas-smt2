@@ -1,0 +1,10 @@
+id;nama;username;password;role
+1;Zaky Ismail;zaky;pass123;CEO
+2;Budi Santoso;budi;pass123;Manager
+3;Andi Pratama;andi;pass123;Admin
+4;Citra Dewi;citra;pass123;Kurir
+5;Doni Kusuma;doni;pass123;Kurir
+6;Eka Putri;eka;pass123;Kurir
+7;Admin Utama;admin;admin;Admin
+8;Manager Satu;manager;manager;Manager
+9;CEO Satu;ceo;ceo;CEO
