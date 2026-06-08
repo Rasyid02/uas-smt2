@@ -137,14 +137,13 @@ Gunakan salah satu akun berikut:
 | Username | Password | Role    |
 |----------|----------|---------|
 | zaky     | pass123  | CEO     |
-| budi     | pass123  | Manager |
-| andi     | pass123  | Admin   |
+| farrel   | pass123  | Manager |
+| irsal    | pass123  | Manager |
+| fauzi    | pass123  | Admin   |
+| dimitri  | pass123  | Admin   |
 | citra    | pass123  | Kurir   |
 | doni     | pass123  | Kurir   |
 | eka      | pass123  | Kurir   |
-| admin    | pass1    | Admin   |
-| manager  | pass1    | Manager |
-| ceo      | pass1    | CEO     |
 
 ### 4. Menu Per Role
 
