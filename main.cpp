@@ -284,12 +284,29 @@ struct Queue {
     inline bool isEmpty() const { return frontNode == nullptr; }
     inline int size() const { return size_; }
 
-    void enqueue(const T& data) {
-        Node* n = new Node(data);
-        if (!rearNode) frontNode = rearNode = n;
-        else { rearNode->next = n; rearNode = n; }
-        size_++;
+   void enqueue(const T& data) {
+    Node* n = new Node(data);
+
+    if (!frontNode) {
+        frontNode = rearNode = n;
+    } 
+
+    else if (data.id_layanan > frontNode->data.id_layanan) {
+        n->next = frontNode;
+        frontNode = n;
+    } 
+
+    else {
+        Node* curr = frontNode;
+        while (curr->next && curr->next->data.id_layanan >= data.id_layanan) {
+            curr = curr->next;
+        }
+        n->next = curr->next;
+        curr->next = n;
+        if (!n->next) rearNode = n; 
     }
+    size_++;
+}
 
     bool dequeue(T& result) {
         if (!frontNode) return false;
@@ -925,7 +942,7 @@ inline bool menuKurir(User* user, PaketData& paket, TrackingData& tracking) {
         case 1: { Paket pk; if (paketDequeue(paket, pk)) { cout << "\n  [BERHASIL] Mengambil paket " << pk.resi << "\n  Penerima: " << pk.nama_penerima << "\n  Tujuan: " << pk.kota_asal << " -> " << pk.kota_tujuan << "\n"; Kurir* k = paketGetNextKurir(paket); if (k) { paketAssignToKurir(paket, pk.id, k->id); trackingUpdateStatus(tracking, pk.id, "Dalam Perjalanan", pk.kota_asal); } else trackingUpdateStatus(tracking, pk.id, "Diproses", "Pusat Sortir"); } else cout << "\n  [KOSONG] Tidak ada paket dalam antrean.\n"; break; }
         case 2: { int id; string st, lok; cout << "\n  ID Paket  : "; cin >> id; cin.ignore(numeric_limits<streamsize>::max(), '\n'); cout << "  Status Baru: "; getline(cin, st); cout << "  Lokasi     : "; getline(cin, lok); trackingUpdateStatus(tracking, id, st, lok); Paket* pp = paketFindById(paket, id); if (pp) pp->status = st; break; }
         case 3: { int id; cout << "\n  ID Paket untuk undo: "; cin >> id; cin.ignore(numeric_limits<streamsize>::max(), '\n'); if (trackingUndoLast(tracking, id)) { Tracking lt = trackingGetLatest(tracking, id); Paket* pp = paketFindById(paket, id); if (pp && !lt.status.empty()) pp->status = lt.status; cout << "  [UNDO] Kembali ke status: " << lt.status << "\n"; } else cout << "  [GAGAL] Tidak ada tracking yang bisa di-undo.\n"; break; }
-        case 4: { cout << "\n  1. Lihat per Paket (masukkan ID)\n  2. Lihat semua\n  Pilih: "; int sub; cin >> sub; cin.ignore(numeric_limits<streamsize>::max(), '\n'); if (sub==1) { int id; cout << "  ID Paket: "; cin >> id; cin.ignore(numeric_limits<streamsize>::max(), '\n'); trackingDisplayHistory(tracking, id); } else trackingDisplayAll(tracking); break; }
+        case 4: { cout << "\n  1. Lihat per Paket (masukkan ID)\n  2. Lihat semua\n  Pilih: "; int sub; cin >> sub; cin.ignore(numeric_limits<streamsize>::max(), '\n'); if (sub==1) { int id; cout << "  ID Paket: "; cin >> id; cin.ignore(numeric_limits<streamsize>::max(), '\n'); trackingProcessHistory(tracking, id, trackingCallbackPrint); } else trackingDisplayAll(tracking); break; }
         case 5: paketDisplayQueue(paket); break;
         case 6: paketDisplayAll(paket); break;
         case 0: cout << "  Logout...\n"; return true;
