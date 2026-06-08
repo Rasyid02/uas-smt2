@@ -1245,9 +1245,9 @@ Program akan memuat semua data dari CSV dan menampilkan:
 === LOADING DATA DARI CSV... ===
 ============================================
   [LOAD] User: zaky (CEO) berhasil dimuat.
-  [LOAD] User: budi (Manager) berhasil dimuat.
+  [LOAD] User: irsal (Manager) berhasil dimuat.
   ...
-  Total 9 user dimuat dari anggota.csv.
+  Total 8 user dimuat dari anggota.csv.
   [LOAD] 3 layanan dimuat.
   [LOAD] 3 klasifikasi dimuat.
   [LOAD] 10 paket dimuat dari paket.csv.
@@ -1268,17 +1268,17 @@ Admin bertanggung jawab atas manajemen data paket, kurir, layanan, dan klasifika
 ============================================
 === SWIFT EXPEDITION - LOGIN ===
 ============================================
-Username : andi
+Username : fauzi
 Password : pass123
 
 ============================================
-Selamat datang, Andi Pratama!
+Selamat datang, Fauzi Bowo!
 Role: Admin
 ============================================
 
 ============================================
 === MENU ADMIN ===
-User: Andi Pratama
+User: Fauzi Bowo
 ============================================
 1. Tambah Paket
 2. Hapus Paket
